@@ -1,10 +1,43 @@
-(require 'cask "~/.cask/cask.el")
-(cask-initialize)
+;;; init.el --- My emacs settings
 
-;; load path
-(require 'auto-install)
-(add-to-list 'load-path "~/.emacs.d/elisp")
-(add-to-list 'load-path "~/.emacs.d/auto-install")
+;;; Commentary:
+
+;;; Code:
+
+;; Determine `user-emacs-directory'.
+(when load-file-name
+  (setq user-emacs-directory (expand-file-name
+                              (file-name-directory load-file-name))))
+
+
+;; Customization variables
+(defgroup my/settings nil
+  "My settings."
+  :group 'emacs)
+
+(defcustom my/use-ergonomic-key-bindings t
+  "Non-nil to use ergonomic key bindings.  See setup-key-bindings.el.
+You need to restart Emacs after changing the value."
+  :group 'my/settings
+  :type 'boolean)
+
+
+;; Loading Cask, configuring paths...
+(load (locate-user-emacs-file "bootstrap"))
+
+;; Load modules
+(require 'core-loader)
+
+(setq my/modules (list
+                  "setup-auto-complete-mode"
+                  "setup-clojure-mode"
+                  "setup-lisp"
+                  "utils"
+                  ))
+
+(my/load-modules)
+
+
 
 ;; mozc
 (when (require 'mozc nil t)
@@ -21,15 +54,15 @@
 (setq anything-grep-candidates-fast-directory-regexp "^/tmp")
 
 ;; auto-complete
-(require 'auto-complete)
-(global-auto-complete-mode t)
-(add-hook 'auto-complete-mode-hook
-          (lambda ()
-            (define-key ac-completing-map (kbd "C-n") 'ac-next)
-            (define-key ac-completing-map (kbd "C-p") 'ac-previous)))
+;; (require 'auto-complete)
+;; (global-auto-complete-mode t)
+;; (add-hook 'auto-complete-mode-hook
+;;           (lambda ()
+;;             (define-key ac-completing-map (kbd "C-n") 'ac-next)
+;;             (define-key ac-completing-map (kbd "C-p") 'ac-previous)))
 
-(add-to-list 'ac-modes 'coffee-mode)
-(add-to-list 'ac-modes 'haml-mode)
+;; (add-to-list 'ac-modes 'coffee-mode)
+;; (add-to-list 'ac-modes 'haml-mode)
 
 ;; ruby
 (add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
@@ -79,29 +112,6 @@
              (local-set-key "\C-ci" 'js-doc-insert-function-doc)
              (local-set-key "@" 'js-doc-insert-tag)
              ))
-
-;; clojure (cider-mode)
-;; (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
-(setq nrepl-hide-special-buffers t)
-(setq cider-repl-tab-command 'indent-for-tab-command)
-(setq cider-popup-stacktraces nil)
-(setq cider-repl-popup-stacktraces t)
-(setq cider-auto-select-error-buffer t)
-(setq cider-stacktrace-default-filters '(tooling dup))
-(setq cider-stacktrace-fill-column 80)
-(setq nrepl-buffer-name-separator "-")
-(setq nrepl-buffer-name-show-port t)
-(setq cider-repl-display-in-current-window t)
-(setq cider-repl-print-length 100)
-;; (set cider-repl-result-prefix ";; => ")
-;; (set cider-interactive-eval-result-prefix ";; => ")
-(setq cider-repl-use-clojure-font-lock t)
-(setq cider-repl-wrap-history t)
-(setq cider-repl-history-size 1000)
-
-(define-key global-map "\C-c\M-c" 'cider-mode)
-(define-key global-map "\C-c\M-j" 'cider-jack-in)
-
 
 ;; gauche
 (setq process-coding-system-alist
@@ -282,9 +292,9 @@
 (setq display-time-day-and-date t)
 (setq display-time-string-forms
       '((format "%s/%s(%s)%s:%s"
-           month day dayname
-           24-hours minutes
-           )))
+                month day dayname
+                24-hours minutes
+                )))
 (display-time)
 
 ;; ediff
@@ -315,13 +325,13 @@
    ("M-m"       . e2wm:pst-window-select-main-command)
    ) e2wm:prefix-key)
 
-; ag
+                                        ; ag
 (setq default-process-coding-system 'utf-8-unix)
 (require 'ag)
 (setq ag-highlight-search t)
 (setq ag-reuse-buffers t)
 
-; wgrep
+                                        ; wgrep
 (add-hook 'ag-mode-hook '(lambda ()
                            (require 'wgrep-ag)
                            (setq wgrep-auto-save-buffer t)
@@ -371,28 +381,8 @@
     global-map "C-q" '(("n" . (lambda () (scroll-other-window 1)))
                        ("p" . (lambda () (scroll-other-window -1)))))
 
-;; yasnippet
-(yas-global-mode 1)
-(defun my-yas/prompt (prompt choices &optional display-fn)
-  (let* ((names (loop for choice in choices
-                      collect (or (and display-fn (funcall display-fn choice))
-                                  coice)))
-         (selected (anything-other-buffer
-                    `(((name . ,(format "%s" prompt))
-                       (candidates . names)
-                       (action . (("Insert snippet" . (lambda (arg) arg))))))
-                    "*anything yas/prompt*")))
-    (if selected
-        (let ((n (position selected names :test 'equal)))
-          (nth n choices))
-      (signal 'quit "user quit!"))))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(yas-prompt-functions (quote (my-yas/prompt)))
- '(yascroll:delay-to-hide nil))
+(require 'yasnippet)
+(yas/global-mode 1)
 
 ;; anything-exuberant-ctags
 ;; (setq anything-exuberant-ctags-enable-tag-file-dir-cache t)

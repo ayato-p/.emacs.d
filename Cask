@@ -6,6 +6,11 @@
 ;; for Emacs
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Package manager
+(depends-on "use-package")
+(depends-on "bind-key")
+(depends-on "init-loader")
+
 ;; Window manager
 (depends-on "e2wm")
 (depends-on "powerline")
@@ -32,15 +37,16 @@
 (depends-on "helm")
 (depends-on "smartrep")
 (depends-on "ace-jump-mode")
-(depends-on "auto-install")
 (depends-on "mozc")
 (depends-on "multiple-cursors")
+(depends-on "exec-path-from-shell")
 
 ;; Highlight
 (depends-on "auto-highlight-symbol")
 (depends-on "highlight-symbol")
 (depends-on "highlight-indentation")
 (depends-on "rainbow-mode")
+(depends-on "rainbow-delimiters")
 
 ;; Git
 (depends-on "magit")
@@ -57,8 +63,10 @@
 ;; for Clojure
 (depends-on "ac-cider")
 (depends-on "ac-cider-compliment")
-(depends-on "clj-refactor")
 (depends-on "cider")
+(depends-on "clj-refactor")
+(depends-on "clojure-mode-extra-font-locking")
+(depends-on "clojure-snippets")
 
 ;; for Ruby
 (depends-on "ruby-end")
