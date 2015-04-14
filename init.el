@@ -15,7 +15,7 @@
   "My settings."
   :group 'emacs)
 
-(defcustom my/use-ergonomic-key-bindings t
+(defcustom my/use-ergonomic-key-bindings nil
   "Non-nil to use ergonomic key bindings.  See setup-key-bindings.el.
 You need to restart Emacs after changing the value."
   :group 'my/settings
@@ -29,9 +29,12 @@ You need to restart Emacs after changing the value."
 (require 'core-loader)
 
 (setq my/modules (list
+                  "setup-flycheck"
                   "setup-auto-complete-mode"
                   "setup-clojure-mode"
                   "setup-lisp"
+                  "setup-yasnippet"
+                  "setup-helm"
                   "utils"
                   ))
 
@@ -396,10 +399,11 @@ You need to restart Emacs after changing the value."
                        ("o" . 'other-window)))
 (smartrep-define-key
     global-map "C-q" '(("n" . (lambda () (scroll-other-window 1)))
-                       ("p" . (lambda () (scroll-other-window -1)))))
+                       ("p" . (lambda () (scroll-other-window -1)))
+                       ("k" . 'flycheck-previous-error)
+                       ("j" . 'flycheck-next-error)))
 
-(require 'yasnippet)
-(yas/global-mode 1)
+
 
 ;; anything-exuberant-ctags
 ;; (setq anything-exuberant-ctags-enable-tag-file-dir-cache t)
@@ -419,7 +423,7 @@ You need to restart Emacs after changing the value."
 (global-anzu-mode +1)
 
 ;; for yascroll
-(global-yascroll-bar-mode 1)
+;; (global-yascroll-bar-mode 1)
 (scroll-bar-mode 0)
 
 (custom-set-faces

@@ -25,7 +25,7 @@
 
             (setq ac-auto-start 1)
             (setq ac-auto-show-menu 0.0)
-            (setq ac-quick-help-delay 0.2)
+            (setq ac-quick-help-delay 0.8)
 
             (bind-keys :map ac-completing-map
                        ("C-s" . ac-isearch))

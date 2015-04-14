@@ -8,9 +8,8 @@
 (use-package paredit
   :defer t
   :config (progn
-            (when my/use-ergonomic-key-bindings
-              (bind-keys :map paredit-mode-map
-                         ("C-h" . paredit-backward-delete)))
+            (bind-keys :map paredit-mode-map
+                       ("C-h" . paredit-backward-delete))
 
             ;; Enable `paredit-mode' in the minibuffer, during `eval-expression'.
             (defun conditionally-enable-paredit-mode ()

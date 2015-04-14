@@ -32,6 +32,10 @@
 (depends-on "wgrep-ag")
 (depends-on "anzu")
 
+;; Flycheck
+(depends-on "flycheck")
+(depends-on "flycheck-clojure")
+
 ;; Misc
 (depends-on "anything")
 (depends-on "helm")
@@ -68,6 +72,7 @@
 (depends-on "clojure-mode-extra-font-locking")
 (depends-on "clojure-snippets")
 (depends-on "slamhound")
+(depends-on "kibit-mode")
 
 ;; for Ruby
 (depends-on "ruby-end")
