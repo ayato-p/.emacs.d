@@ -31,4 +31,4 @@
                           (signal 'quit "user quit!")
                         (cdr (assoc result rmap))))
                   nil))
-              (setq yas/prompt-functions '(my/yas-helm-prompt yas-ido-prompt yas-no-prompt))))))
+              (setq yas/prompt-functions '(my/yas-helm-prompt yas-no-prompt))))))

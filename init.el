@@ -32,6 +32,7 @@ You need to restart Emacs after changing the value."
                   "setup-flycheck"
                   "setup-auto-complete-mode"
                   "setup-clojure-mode"
+                  "setup-scss-mode"
                   "setup-lisp"
                   "setup-yasnippet"
                   "setup-helm"
@@ -94,14 +95,6 @@ You need to restart Emacs after changing the value."
              (hs-minor-mode 1)
              (coffee-custom)
              (define-key coffee-mode-map (kbd "C-m") 'newline)))
-
-;; css
-(add-hook 'css-mode-hook 'ac-css-mode-setup)
-
-;; scss
-(add-hook 'scss-mode-hook 'ac-css-mode-setup)
-(setq scss-compile-at-save nil)
-(setq css-indent-offset 2)
 
 ;; json-mode
 (add-hook 'json-mode-hook
@@ -358,10 +351,13 @@ You need to restart Emacs after changing the value."
                            (setq wgrep-enable-key "r")
                            (wgrep-ag-setup)))
 
+(require 'anything-git-files)
+
 ;; key config
 (global-set-key (kbd "C-x b") 'anything-for-files)
 (global-set-key (kbd "M-y") 'anything-show-kill-ring)
 (global-set-key (kbd "C-c C-f") 'anything-filelist+)
+(global-set-key (kbd "C-x M-f") 'anything-git-files)
 (global-set-key (kbd "\C-h") 'delete-backward-char)
 (global-set-key (kbd "\C-xrl") 'anything-bookmarks)
 (global-set-key (kbd "<f5>") 'revert-buffer-no-confirm)
@@ -402,7 +398,6 @@ You need to restart Emacs after changing the value."
                        ("p" . (lambda () (scroll-other-window -1)))
                        ("k" . 'flycheck-previous-error)
                        ("j" . 'flycheck-next-error)))
-
 
 
 ;; anything-exuberant-ctags

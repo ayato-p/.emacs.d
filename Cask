@@ -38,6 +38,7 @@
 
 ;; Misc
 (depends-on "anything")
+(depends-on "anything-git-files")
 (depends-on "helm")
 (depends-on "smartrep")
 (depends-on "ace-jump-mode")
@@ -60,6 +61,8 @@
 ;; for Language
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; for web development
+(depends-on "web-mode")
 
 ;; for Lisp
 (depends-on "paredit")
@@ -72,7 +75,9 @@
 (depends-on "clojure-mode-extra-font-locking")
 (depends-on "clojure-snippets")
 (depends-on "slamhound")
+(depends-on "midje-mode")
 (depends-on "kibit-mode")
+(depends-on "align-cljlet")
 
 ;; for Ruby
 (depends-on "ruby-end")

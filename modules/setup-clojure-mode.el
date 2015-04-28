@@ -6,6 +6,7 @@
 
 ;; (define-key global-map "\C-c\M-c" 'cider-mode)
 (define-key global-map "\C-c\M-j" 'cider-jack-in)
+(add-to-list 'auto-mode-alist '("\\.boot\\'" . clojure-mode))
 
 ;; Clojure
 (use-package clojure-mode
@@ -20,6 +21,10 @@
       :disabled t
       :ensure t)
     (use-package clojure-mode-extra-font-locking)
+    (use-package align-cljlet
+      :init (bind-keys :map clojure-mode-map
+                       ("C-c j a l" . align-cljlet)))
+    (use-package midje-mode)
     (use-package clj-refactor
       :config (cljr-add-keybindings-with-prefix "C-c j"))
     (use-package cider
