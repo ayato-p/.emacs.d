@@ -18,7 +18,8 @@
 
 ;; Scroll
 (depends-on "deferred")
-(depends-on "inertial-scroll" :git "git@github.com:kiwanami/emacs-inertial-scroll.git")
+
+(depends-on "inertial-scroll" :git "https://github.com/kiwanami/emacs-inertial-scroll.git")
 
 ;; Edit
 (depends-on "auto-complete")
@@ -68,6 +69,7 @@
 (depends-on "paredit")
 
 ;; for Clojure
+(depends-on "inf-clojure")
 (depends-on "ac-cider")
 (depends-on "ac-cider-compliment")
 (depends-on "cider")
