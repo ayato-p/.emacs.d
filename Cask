@@ -69,7 +69,7 @@
 (depends-on "paredit")
 
 ;; for Clojure
-(depends-on "inf-clojure")
+(depends-on "inf-clojure" :git "https://github.com/ayato0211/inf-clojure.git")
 (depends-on "ac-cider")
 (depends-on "ac-cider-compliment")
 (depends-on "cider")
