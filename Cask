@@ -69,7 +69,6 @@
 
 ;; for Clojure
 (depends-on "ac-cider")
-(depends-on "ac-cider-compliment")
 (depends-on "cider")
 (depends-on "clj-refactor")
 (depends-on "clojure-mode-extra-font-locking")
