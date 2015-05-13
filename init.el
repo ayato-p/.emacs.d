@@ -36,6 +36,7 @@ You need to restart Emacs after changing the value."
                   "setup-lisp"
                   "setup-yasnippet"
                   "setup-helm"
+                  "setup-rst-mode"
                   "utils"
                   ))
 
@@ -250,6 +251,7 @@ You need to restart Emacs after changing the value."
 (setq-default tab-width 2 indent-tabs-mode nil)
 ;; (setq-default tab-width 2 indent-tabs-mode nil)
 ;; fullscreen
+(set-frame-parameter nil 'fullscreen 'fullboth)
 (defun toggle-fullscreen ()
   (interactive)
   (set-frame-parameter nil 'fullscreen
